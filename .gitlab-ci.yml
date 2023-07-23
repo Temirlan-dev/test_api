@@ -12,30 +12,31 @@ build_job:
     - shell
   script:
     - echo "Maven compile started"
-    - $MAVEN_HOME/bin/mvn compile
+    - mvn compile
+
+test_job:
+  stage: test
+  tags:
+    - shell
+  script:
+    - echo "Maven test started"
+    - mvn test
+
+package_job:
+  stage: package
+  tags:
+    - shell
+  script:
+    - echo "Maven packaging started"
+    - mvn package
   artifacts:
     paths:
-      - target/rest-1.0.jar
+      - target/*.jar
 
-#test_job:
-#  stage: test
-#  tags:
-#    - shell
-#  script:
-#    - echo "Maven test started"
-#    - "mvn test"
-#
-#package_job:
-#  stage: package
-#  tags:
-#    - shell
-#  script:
-#    - echo "Maven packaging started"
-#    - echo "mvn package"
-#
-#deploy_job:
-#  stage: deploy
-#  tags:
-#    - shell
-#  script:
-#    - echo "Maven deploy started"
+deploy_job:
+  stage: deploy
+  tags:
+    - shell
+  script:
+    - echo "Maven deploy started"
+    - scp -o StrictHostKeyChecking=no /home/gitlab-runner/builds/mLuk1tjb/0/aboutev.kg/rest_api/target/rest-1.0.jar temirlan@192.168.43.132:/home/api
