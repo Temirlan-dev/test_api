@@ -37,6 +37,16 @@ deploy_job:
   stage: deploy
   tags:
     - shell
-  script:
+  before_script:
+    - 'command -v ssh agent >/dev/null || ( apk add --update openssh )'
+    # Run ssh-agent (inside the build environment)
+    - eval $(ssh-agent -s)
+    # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $ES2_IPADDRESS >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
     - echo "Maven deploy started"
+  script:
     - scp -o StrictHostKeyChecking=no /home/gitlab-runner/builds/mLuk1tjb/0/aboutev.kg/rest_api/target/rest-1.0.jar temirlan@192.168.43.132:/home/api
