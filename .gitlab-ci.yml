@@ -12,7 +12,10 @@ build_job:
     - shell
   script:
     - echo "Maven compile started"
-    - "mvn compile"
+    - $MAVEN_HOME/bin/mvn compile
+  artifacts:
+    paths:
+      - target/*.jar
 
 test_job:
   stage: test
