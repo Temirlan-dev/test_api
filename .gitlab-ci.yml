@@ -12,7 +12,7 @@ build_job:
     - shell
   script:
     - echo "Maven compile started"
-    - "mvn compile"
+    - mvn compile
 
 test_job:
   stage: test
@@ -20,7 +20,7 @@ test_job:
     - shell
   script:
     - echo "Maven test started"
-    - "mvn test"
+    - mvn test
 
 package_job:
   stage: package
