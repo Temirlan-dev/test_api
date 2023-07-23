@@ -1,23 +1,46 @@
-build-job:
+variables:
+  MAVEN_OPTS: -Dmaven.repo.local=.m2/repository
+
+image: maven:lates
+
+stages:
+  - build
+  - test
+  - package
+  - deploy
+
+cache:
+  paths:
+    - .m2/repository
+    - target
+
+build_job:
   stage: build
+  tags:
+    - shell
   script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
+    - echo "Maven compile started"
+    - "mvn compile"
 
-test-job1:
+test_job:
   stage: test
+  tags:
+    - shell
   script:
-    - echo "This job tests something"
+    - echo "Maven test started"
+    - "mvn test"
 
-test-job2:
-  stage: test
+package_job:
+  stage: package
+  tags:
+    - shell
   script:
-    - echo "This job tests something, but takes more time than test-job1."
-    - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
-    - echo "which simulates a test that runs 20 seconds longer than test-job1"
-    - sleep 20
+    - echo "Maven packaging started"
+    - echo "mvn package"
 
-deploy-prod:
+deploy_job:
   stage: deploy
+  tags:
+    - shell
   script:
-    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
-  environment: production
+    - echo "Maven deploy started"
