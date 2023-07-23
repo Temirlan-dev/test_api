@@ -1,8 +1,19 @@
+stages:
+  - build
+  - build-docker-image
 
+build-java-project:
+  stage: build
+  script: mvn package
+  artifacts:
+    paths:
+      - /home/gitlab-runner/
 
-
-
-
+build-docker-image:
+  stage: build-docker-image
+  script:
+    - docker info
+    - docker build -t rest .
 
 #image: maven:latest
 #
