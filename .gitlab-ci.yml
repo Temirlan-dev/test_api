@@ -15,27 +15,27 @@ build_job:
     - $MAVEN_HOME/bin/mvn compile
   artifacts:
     paths:
-      - target/*.jar
+      - target/rest-1.0.jar
 
-test_job:
-  stage: test
-  tags:
-    - shell
-  script:
-    - echo "Maven test started"
-    - "mvn test"
-
-package_job:
-  stage: package
-  tags:
-    - shell
-  script:
-    - echo "Maven packaging started"
-    - echo "mvn package"
-
-deploy_job:
-  stage: deploy
-  tags:
-    - shell
-  script:
-    - echo "Maven deploy started"
+#test_job:
+#  stage: test
+#  tags:
+#    - shell
+#  script:
+#    - echo "Maven test started"
+#    - "mvn test"
+#
+#package_job:
+#  stage: package
+#  tags:
+#    - shell
+#  script:
+#    - echo "Maven packaging started"
+#    - echo "mvn package"
+#
+#deploy_job:
+#  stage: deploy
+#  tags:
+#    - shell
+#  script:
+#    - echo "Maven deploy started"
