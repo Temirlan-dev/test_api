@@ -18,7 +18,7 @@ build:
 deploy:
   image: docker
   services:
-    - docker:bind
+    - docker
   stage: deploy
   script:
     - echo "Starting to build"
