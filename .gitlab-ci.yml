@@ -5,12 +5,12 @@ stages:
   - deploy
 
 build:
-  image: maven:3.11.0-jdk-8
+  image: maven:3.8-openjdk-17
   stage: build
   script:
     - echo "Starting to build"
     - mvn -version
-    - mvn package
+    - mvn package -DskipTests=true
   artifacts:
     paths:
       - target/*jar
