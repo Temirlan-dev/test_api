@@ -5,7 +5,7 @@ stages:
   - deploy
 
 build:
-  image: maven:17.0.7-jdk-17
+  image: maven:3.6.3-jdk-17
   stage: build
   script:
     - echo "Starting to build"
