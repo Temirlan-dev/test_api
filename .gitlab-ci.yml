@@ -4,6 +4,10 @@ stages:
   - build
   - deploy
 
+variables:
+  TAG_LATEST: temirlan/$CI_COMMIT_REF_NAME:latest
+  TAG_COMMIT: temirlan/$CI_COMMIT_REF_NAME:$CI_COMMIT_SHORT_SHA
+
 build:
   image: maven:3.8-openjdk-17
   stage: build
@@ -18,7 +22,7 @@ build:
 deploy:
   image: docker
   services:
-    - docker
+    - docker:dind
   stage: deploy
   script:
     - echo "Starting to build"
