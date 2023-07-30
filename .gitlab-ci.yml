@@ -30,6 +30,5 @@ maven-test:
 docker-build:
   stage: docker
   script:
-#    - docker build -t $APP_IMAGE .
-#    - docker run -d -p 8090:8080 $APP_IMAGE
-    - docker-compose up -d --build
+    - docker build -t $APP_IMAGE .
+    - docker run -d -p 8090:8080 $APP_IMAGE
