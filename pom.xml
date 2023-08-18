@@ -13,6 +13,8 @@
 	<version>1.0</version>
 	<name>just_rest</name>
 	<description>Demo project for Spring Boot</description>
+	<packaging>war</packaging>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
